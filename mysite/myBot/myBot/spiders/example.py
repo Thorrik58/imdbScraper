@@ -6,10 +6,10 @@ from myBot.items import MovieItem
 
 class ExampleSpider(BaseSpider):
     name = "example"
-    allowed_domains = ["example.com"]
     start_urls = (
-        'http://www.example.com/',
+        'http://www.imdb.com/chart/top?ref_=nv_ch_250/',
     )
 
     def parse(self, response):
-        return MovieItem(name='The Endless Journey')
+        title = response.xpath('//title')
+        return MovieItem(name=title)
