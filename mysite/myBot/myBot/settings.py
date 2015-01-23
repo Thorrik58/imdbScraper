@@ -22,4 +22,10 @@ sys.path.append('/Users/Thorri/Desktop/githubRepos/imdbScrapper/mysite')
 
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings'
+#Added because of a model were not lodaded
+#http://stackoverflow.com/questions/25537905/django-1-7-throws-django-core-exceptions-appregistrynotready-models-arent-load
 application = get_wsgi_application()
+
+ITEM_PIPELINES = {
+    'myBot.pipelines.MybotPipeline': 1000,
+}
