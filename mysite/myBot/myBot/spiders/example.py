@@ -4,7 +4,7 @@ from scrapy.spider import BaseSpider
 from myBot.items import MovieItem
 
 
-class example(BaseSpider):
+class movieSpider(BaseSpider):
     name = "example"
     allowed_domains = ["imdb.com"]
     start_urls = (
@@ -12,5 +12,15 @@ class example(BaseSpider):
     )
 
     def parse(self, response):
-        for sel in response.xpath("//*[@class='chart']/tbody/tr/td[2]"):
-            return MovieItem(name=sel.xpath('a/text()').extract()[0])
+        for sel in response.xpath("//*[@class='chart']/tbody/tr/td[@class='titleColumn']"):
+            nam = sel.xpath('a/text()').extract()[0]
+            rat = sel.xpath('span[@name="ir"]/@data-value').extract()[0]
+            ran = sel.xpath('span[@name="ir"]/text()').re('\d+')[0]
+            #MovieItem['Year']=sel.xpath('a/text()').extract()[0]
+            MovieItem(name=nam,rating=rat,ranking=ran).save()
+
+            #print (sel.xpath('a/text()').extract()[0])
+            #name (sel.xpath('a/text()').extract()[0])
+            #rating (sel.xpath('span[@name="ir"]/@data-value').extract()[0])
+            #year (sel.xpath('span[@name="rd"]/@data-value').extract()[0])
+            #ranking (sel.xpath('span[@name="ir"]/text()').re('\d+')[0])
