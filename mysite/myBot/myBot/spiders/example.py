@@ -16,8 +16,8 @@ class movieSpider(BaseSpider):
             nam = sel.xpath('a/text()').extract()[0]
             rat = sel.xpath('span[@name="ir"]/@data-value').extract()[0]
             ran = sel.xpath('span[@name="ir"]/text()').re('\d+')[0]
-            #MovieItem['Year']=sel.xpath('a/text()').extract()[0]
-            MovieItem(name=nam,rating=rat,ranking=ran).save()
+            yea = sel.xpath('span[@name="rd"]/@data-value').extract()[0]
+            MovieItem(name=nam,rating=rat,ranking=ran, year=yea).save()
 
             #print (sel.xpath('a/text()').extract()[0])
             #name (sel.xpath('a/text()').extract()[0])
