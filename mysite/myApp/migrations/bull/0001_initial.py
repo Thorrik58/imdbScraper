@@ -16,9 +16,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=200)),
                 ('rating', models.FloatField(default=0.0)),
-                ('pubdate', models.IntegerField(default=0)),
-                ('ranking', models.IntegerField(default=0)),
                 ('year', models.IntegerField(default=0)),
+                ('summary', models.TextField()),
             ],
             options={
             },
